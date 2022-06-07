@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Leave</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+    <!--Favicon-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <!--Header Section-->
+    <header>
+      <h1 class="logo">ELMS</h1>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+
+      <nav>
+        <div class="topnav">
+
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link name">{{name}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin"
+                  ><i class="fa fa-home" aria-hidden="true">HOME</i></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"
+                  ><i class="fa fa-sign-out" aria-hidden="true">LOGOUT</i></a
+                >
+              </li>
+            </ul>
+
+        </div>
+      </nav>
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+    </header>
+
+      <table>
+        <!--Heading of Table-->
+        <thead>
+          <th>From Date</th>
+          <th>To Date</th>
+          <th>Days</th>
+          <th>Reason</th>
+          <th>Action</th>
+        </thead>
+        <!--Content of Table-->
+        {% for i in leavedata %}
+        <tbody>
+          <td>{{i['start']}}</td>
+          <td>{{i['end']}}</td>
+          <td>{{i['days']}}</td>
+          <td>{{i['reason']}}</td>
+          {% if i['action']=="APPROVED" %}
+          <td style="color: green; font-weight: bolder; font-size: large">{{i['action']}}</td>
+          {% endif %}
+          {% if i['action']=="REJECTED" %}
+          <td style="color: red; font-weight: bolder; font-size: large">{{i['action']}}</td>
+          {% endif %}
+          {% if i['action']=="PENDING" %}
+          <td style="color: blue; font-weight: bolder; font-size: large">{{i['action']}}</td>
+          {% endif %}
+        </tbody>
+        {% endfor %}
+      </table>
+  </body>
+</html>

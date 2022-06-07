@@ -1,0 +1,94 @@
+//Search Date Prepare a New html page
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leave Request</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+    <!--Favicon-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <!--Header Section-->
+    <header>
+      <h1 class="logo">ELMS</h1>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <!--Alert-->
+      {% with message = get_flashed_messages(with_categories=true) %} {% if
+      message %} {% for category, msg in message %}
+      <div class="message" id="alert">
+        <div
+          class="alert alert-{{category}} alert-dismissible fade show"
+          role="alert"
+        >
+          {{msg}}
+          <button
+            type="button"
+            class="icon"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          >
+            <i class="material-icon">&times;</i>
+          </button>
+        </div>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+      <nav>
+        <div class="topnav">
+          <form action="" method="post">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link name" href="">{{name}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin"
+                  ><i class="fa fa-home" aria-hidden="true">HOME</i></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"
+                  ><i class="fa fa-sign-out" aria-hidden="true">LOGOUT</i></a
+                >
+              </li>
+            </ul>
+          </form>
+        </div>
+      </nav>
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+    </header>
+
+    <!--Table-->
+
+      <table>
+        <!--Heading of Table-->
+        <thead>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Reason</th>
+        </thead>
+        <!--Content of Table-->
+          {% for i in leaves %}
+        <tbody>
+          <td>{{i['empid]}}</td>
+          <td>{{i['empname']}}</td>
+          <td>{{i['emprole']}}</td>
+          <td>{{i['start']}}</td>
+          <td>{{i['end']}}</td>
+          <td>{{i['reason']}}</td>
+        </tbody>
+          {endfor}
+      </table>
+
+  </body>
+</html>

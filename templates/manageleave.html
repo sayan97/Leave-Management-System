@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Leave</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+    <!--Favicon-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <!--Header Section-->
+    <header>
+      <h1 class="logo">ELMS</h1>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+
+      <nav>
+        <div class="topnav">
+
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link name">{{name}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin"
+                  ><i class="fa fa-home" aria-hidden="true">HOME</i></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"
+                  ><i class="fa fa-sign-out" aria-hidden="true">LOGOUT</i></a
+                >
+              </li>
+            </ul>
+
+        </div>
+      </nav>
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+    </header>
+    <!--Table-->
+
+      <table>
+        <!--Heading of Table-->
+        <thead>
+          <th class="medium">Employee Id</th>
+          <th class="med-name">Employee Name</th>
+          <th class="low">From Date</th>
+          <th class="low">To Date</th>
+          <th class="low">Days</th>
+          <th class="high">Reason</th>
+          <th class="medium">Action</th>
+        </thead>
+        <!--Content of Table-->
+        {% for i in pending_leaves %}
+        <tbody>
+          <td class="medium">{{i['empid']}}</td>
+          <td class="med-name">{{i['empname']}}</td>
+          <td class="low">{{i['start']}}</td>
+          <td class="low">{{i['end']}}</td>
+          <td class="low">{{i['days']}}</td>
+          <td class="high">{{i['reason']}}</td>
+          <td class="medium">
+            <a href="{{url_for('approve', empid=i['empid'], start=i['date'])}}">
+              <button class="accept" data-modal="modal1">Accept</button></a>
+            <a href="{{url_for('reject', empid=i['empid'], start=i['date'])}}">
+              <button class="reject" data-modal="modal5">Reject</button></a>
+          </td>
+        </tbody>
+        {% endfor %}
+      </table>
+
+  <!--Alert-->
+      <div class="message" id="alert">
+        {% with message = get_flashed_messages(with_categories=true) %} {% if
+      message %} {% for category, msg in message %}
+        <div
+          class="alert alert-{{category}} alert-dismissible fade show"
+          role="alert"
+        >
+          {{msg}}
+          <button
+            type="button"
+            class="icon"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          >
+            <i class="material-icon">&times;</i>
+          </button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+      </div>
+
+  </body>
+<script src="{{url_for('static', filename='scripts/script.js') }}"></script>
+</html>

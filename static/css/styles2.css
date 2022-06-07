@@ -1,0 +1,524 @@
+/*Nav-bar*/
+body {
+  background-color: #a1e3d8;
+}
+.message {
+  text-align: center;
+  color: red;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  background-color: #a1e3d8;
+}
+nav {
+  position: absolute;
+  text-align: right;
+  top: 100%;
+  right: 0;
+  background-color: #a1e3d8;
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  margin-bottom: 1em;
+  margin-right: 1em;
+}
+
+nav a {
+  color: #035397;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 250ms ease-in-out 150ms;
+}
+
+nav a:hover:not(.name) {
+  color: black;
+}
+h1 {
+  font-family: 'Ubuntu';
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-decoration-line: none;
+  color: #035397;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 1em;
+  border: 1px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: #035397;
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: '';
+  position: absolute;
+}
+
+.nav-toggle-label span::before {
+  bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+  top: 7px;
+}
+.nav-toggle:checked ~ nav {
+  transform: scale(1, 1);
+}
+
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(600px, 1fr) 1fr;
+  }
+
+  nav {
+    all: unset;
+    grid-column: 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+  }
+
+  .logo {
+    grid-column: 1;
+  }
+  nav li {
+    margin-left: 3em;
+    margin-bottom: 0;
+  }
+  nav ul {
+    display: flex;
+    justify-content: flex-end;
+    border: 1px;
+  }
+  nav a {
+    opacity: 1;
+    position: relative;
+  }
+
+  nav a::before: not (.name) {
+    content: '';
+    display: block;
+    height: 5px;
+    background: black;
+    position: absolute;
+    top: -0.75em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transform-origin: right;
+    transition: transform ease-in-out 250ms;
+  }
+
+  nav a:hover::before {
+    transform: scale(1, 1);
+  }
+}
+
+/* Alert Bar*/
+
+#alert {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  top: 40px;
+  height: fit-content;
+  z-index: 9999;
+}
+
+#alert:target {
+  display: none;
+}
+.alert {
+  background-color: #4b7be5;
+  background-size: 20px 20px;
+  color: #fff;
+  display: block;
+  font: bold 16px/40px sans-serif;
+  height: 40px;
+  border-radius: 5px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  top: -45px;
+  width: fit-content;
+  padding-left: 10px;
+  -webkit-animation: alert 1s ease forwards;
+  -moz-animation: alert 1s ease forwards;
+  -ms-animation: alert 1s ease forwards;
+  -o-animation: alert 1s ease forwards;
+  animation: alert 1s ease forwards;
+}
+
+/* Animation of Alert Bar */
+
+@-webkit-keyframes alert {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+  }
+}
+@-moz-keyframes alert {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+  }
+}
+@-ms-keyframes alert {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+  }
+}
+@-o-keyframes alert {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+  }
+}
+@keyframes alert {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+/*Modal Pop-Up*/
+.icon {
+  /*Cross icon*/
+  float: right;
+  font-size: 20px;
+  background: none;
+  border: 0;
+  outline: 0;
+  padding: 5px 8px;
+}
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+
+.modal-content {
+  background: #40dfef;
+  margin-top: 100px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px 24px;
+  border-radius: 10px;
+  z-index: 4;
+}
+
+.modal-header {
+  font-weight: 500;
+  padding: 10px 0;
+  font-size: 26px;
+  text-align: center;
+  color: #035397;
+  font-size: 50px;
+}
+
+.modal-header .icon {
+  float: right;
+  font-size: 20px;
+  background: none;
+  border: 0;
+  outline: 0;
+  padding: 5px 8px;
+}
+
+.modal-body {
+  color: #a1e3d8;
+  padding: 15px 0;
+}
+
+.modal-footer {
+  padding: 15px 0;
+}
+
+.modal-footer .modal-submit {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  color: #035397;
+  margin: 0 auto;
+  display: block;
+}
+
+.modal-submit:hover {
+  background-color: #035397;
+  color: #fff;
+  box-shadow: 0 0.5em 0.5em -0.4em;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.modal-open:not(.modal-submit) {
+  position: relative;
+  outline: none;
+  margin: 20px 0;
+  padding: 10px 40px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  border: 2px solid #035397;
+  border-radius: 15px;
+  font-size: 18px;
+  background-color: #035397;
+}
+.modal-open .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
+.modal-open:hover,
+.modal-open:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em;
+  transform: translateY(-0.25em);
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  background-color: #40dfef;
+  padding: 70px 60px;
+  border-radius: 20px;
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+  display: inline-block;
+  margin-top: 50px;
+}
+.display__empId {
+  color: #035397;
+}
+
+button {
+  cursor: pointer;
+  text-align: center;
+}
+
+/*Fields inside Modal*/
+input,
+select {
+  width: 100%;
+  border-radius: 5px;
+  border-style: solid;
+  height: 2.5em;
+  outline: none;
+  margin: 10px 0;
+  text-align: center;
+}
+
+input:focus,
+select:focus {
+  border-color: rgba(56, 172, 238, 0.86);
+  box-shadow: rgba(56, 172, 238, 0.86);
+  box-shadow: 0 0.5em 0.5em -0.4em;
+}
+
+::placeholder,
+input[type='date'] {
+  text-align: center;
+  font-size: small;
+}
+
+/*Calender Symbol in Input Field*/
+::-webkit-calendar-picker-indicator {
+  padding-right: 10px;
+}
+/*Password Toggle Eye Button*/
+.eye {
+  margin-left: -20px;
+  cursor: pointer;
+}
+.eye-view {
+  float: right;
+  position: relative;
+  bottom: 37px;
+  padding-right: 10px;
+  color: black;
+  cursor: pointer;
+}
+/*Table*/
+.reason {
+  height: 10em;
+}
+label {
+  color: black;
+  font-size: 17px;
+  text-align: left;
+}
+table {
+  position: relative;
+  width: 100%;
+  top: 200px;
+}
+td {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.accept {
+  background-color: #b4e197;
+  border-radius: 3px;
+  padding: 8px 8px;
+  border-color: #4e944f;
+}
+.accept:hover {
+  background-color: #4e944f;
+  color: #fff;
+}
+.reject {
+  background-color: #ff6666;
+  border-radius: 3px;
+  padding: 8px 8px;
+  border-color: #ff1a1a;
+}
+.reject:hover {
+  background-color: #e60000;
+  color: #fff;
+}
+thead {
+  text-decoration: underline;
+  font-size: larger;
+}
+.sr-message {
+  font-size: 15px;
+  text-align: center;
+  width: 70%;
+}
+.alert-accept {
+  text-align: center;
+  top: 50px;
+  color: #e60000;
+  border-radius: 5px;
+  padding: 30px 10px;
+  width: 20%;
+  height: 20%;
+  margin: auto;
+}
+
+.modal-body .leaves {
+  width: 40%;
+  display: inline-block;
+  text-align: center;
+  font-size: larger;
+  padding: 20px 0;
+  background-color: #035397;
+  margin: 0 30px;
+  border-radius: 5px;
+}
+/* .reason {
+  column-width: 30%;
+}
+
+.name {
+  cursor: default;
+}
+
+.medium {
+  width: 15%;
+}
+
+.low {
+  width: 10%;
+}
+
+.med-name {
+  width: 20%;
+}
+
+.high {
+  width: 30%;
+} */

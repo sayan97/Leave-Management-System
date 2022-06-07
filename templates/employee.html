@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+    <!--FontAwesome-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <!--Header Section-->
+    <header>
+      <h1 class="logo">ELMS</h1>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+
+      <nav>
+        <div class="topnav">
+
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link name">{{name}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"
+                  ><i class="fa fa-sign-out" aria-hidden="true">LOGOUT</i></a
+                >
+              </li>
+            </ul>
+
+        </div>
+      </nav>
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+    </header>
+
+    <!--Modal Buttons-->
+    <div class="center">
+      <h1>Welcome</h1>
+      <form action="/pastleaves" method="post">
+      <div>
+        <button class="modal-open" data-modal="modal1">Past Leave Requests</button>
+      </div>
+      </form>
+      <div>
+        <button class="modal-open" data-modal="modal2">New Requests</button>
+      </div>
+      <div>
+        <button class="modal-open" data-modal="modal3">Change Password</button>
+      </div>
+    </div>
+
+    <!--Modals-->
+    <!--New Request-->
+    <div class="modal" id="modal2">
+      <div class="modal-content">
+        <div class="modal-header">
+          New Request
+          <button class="icon"><i class="material-icon">&times;</i></button>
+        </div>
+        <form action="/newrequest" method="post">
+          <div class="modal-body">
+            <label for="from">From Date:</label>
+            <input
+              type="date"
+              class="from-date"
+              placeholder="From"
+              name="start"
+            />
+            <label for="to">To Date:</label>
+            <input type="date" class="to-date" placeholder="To" name="end" />
+            <label for="reason">Reason:</label>
+            <input
+              type="text"
+              class="reason"
+              placeholder="Reason"
+              name="reason"
+            />
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="modal-submit">Apply</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--Change Password-->
+    <div class="modal" id="modal3">
+      <div class="modal-content">
+        <div class="modal-header">
+          Change Password
+          <button class="icon"><i class="material-icon">&times;</i></button>
+        </div>
+        <form action="/passchange" method="post">
+          <div class="modal-body">
+            <label for="password">Password:</label>
+            <div class="input-row">
+              <input
+                type="password"
+                class="pass"
+                id="idPassword"
+                placeholder="Password"
+                name="p1"
+              />
+              <span class="eye-view"
+                ><i class="fa fa-eye" id="togglePassword" aria-hidden="true"></i
+              ></span>
+            </div>
+
+            <div class="input-row">
+              <label for="cpass">Confirm Password:</label>
+              <input
+                type="password"
+                class="conpass"
+                id="idPassword"
+                placeholder="Password"
+                name="p2"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="modal-submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--Alert-->
+      {% with message = get_flashed_messages(with_categories=true) %} {% if
+      message %} {% for category, msg in message %}
+      <div class="message modal" id="alert">
+        <div
+          class="alert alert-{{category}} alert-dismissible fade show"
+          role="alert"
+        >
+          {{msg}}
+          <button
+            type="button"
+            class="icon"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          >
+            <i class="material-icon">&times;</i>
+          </button>
+        </div>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+
+    <script src="{{url_for('static', filename='scripts/script.js') }}"></script>
+  </body>
+</html>

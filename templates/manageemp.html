@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Form</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+    <!--Favicon-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <h1 class="logo">ELMS</h1>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+
+      <nav>
+        <div class="topnav">
+
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link name">{{name}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin"
+                  ><i class="fa fa-home" aria-hidden="true">HOME</i></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout"
+                  ><i class="fa fa-sign-out" aria-hidden="true">LOGOUT</i></a
+                >
+              </li>
+            </ul>
+
+        </div>
+      </nav>
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+    </header>
+
+    <!--Modal Buttons-->
+    <div class="center">
+      <div class="display__empId">
+        <h2>Employee ID : {{empid}}</h2>
+      </div>
+      <div>
+        <button class="modal-open" data-modal="modal1">Update Details</button>
+      </div>
+      <div>
+        <button class="modal-open" data-modal="modal2">View Leaves</button>
+      </div>
+    </div>
+    <!--Modals-->
+    <!--Update Details-->
+    <div class="modal" id="modal1">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          Update Details
+          <button class="icon"><i class="material-icon">&times;</i></button>
+        </div>
+        <form action="/editemployee" method="post">
+          <div class="modal-body">
+            <label for="Employee ID">Employee ID:</label>
+            <input
+              type="text"
+              class="emp-id"
+              value="{{info['empid']}}"
+              name="empid"
+              readonly
+            />
+            <label for="Employee Name">Employee Name:</label>
+            <input
+              type="text"
+              class="empname"
+              value="{{info['empname']}}"
+              name="empname"
+              
+
+            />
+            <label for="Email">E-mail:</label>
+            <input
+              type="text"
+              class="mail"
+              value="{{info['email']}}"
+              name="email"
+
+            />
+            <label for="Employee Role">Employee Role:</label>
+            <select name="emprole" id="emprole" >
+              <option value="{{info['emprole']}}">{{info['emprole']}}</option>
+              <option value="developer">Developer</option>
+              <option value="tester">Tester</option>
+              <option value="manager">Manager</option>
+              <option value="sales">Sales</option>
+            </select>
+            <label for="Join Date">Joining Date:</label>
+            <input type="text" class="join-date" name="doj" value="{{info['doj']}}" readonly/>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="modal-submit"
+              contenteditable="true"
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <!--Modal 2-->
+    <div class="modal" id="modal2">
+      <div class="modal-content">
+        <div class="modal-header">
+          View Leaves
+          <button class="icon"><i class="material-icon">&times;</i></button>
+        </div>
+
+          <div class="modal-body">
+            <div class="leaves">Leaves requested this month : {{levreq}}</div>
+            <div class="leaves">Leaves approved this month : {{levapp}}</div>
+          </div>
+          <div class="modal-footer">
+            <a href="{{url_for('showleaves', empid=empid)}}">
+            <button type="submit" class="modal-submit">
+              View Details
+            </button>
+            </a>
+          </div>
+
+      </div>
+    </div>
+  <!--Alert-->
+
+      <div class="message"  id="alert">
+
+         {% with message = get_flashed_messages(with_categories=true) %}
+          {% if message %} {% for category, msg in message %}
+        <div
+          class="alert alert-{{category}} alert-dismissible fade show"
+          role="alert"
+        >
+          {{msg}}
+          <button
+            type="button"
+            class="icon"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          >
+            <i class="material-icon">&times;</i>
+          </button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+      </div>
+  </body>
+  <script src="{{url_for('static', filename='scripts/script.js') }}"></script>
+</html>
